@@ -18,14 +18,14 @@ describe("Hostile Aliens Game", () => {
     </div>
     `);
     });
-    test("Should target the defined container", () => {
-      // expected output
-    });
   });
 
-  xdescribe("Fleet Array", () => {
-    // fleet array
+  xdescribe("Fleet Array Function", () => {
+    // fleet array function
     // ship objects
+    test("Should create ship object and assign to fleet array", () => {
+      // expected outcomes
+    });
     test("Should store ship data in correct way", () => {
       // expected outcome
     });
@@ -34,8 +34,6 @@ describe("Hostile Aliens Game", () => {
   xdescribe("Alien Ship Class", () => {
     // object based on class
     // fleet array
-    test("Should create ship object and assign to fleet array", () => {});
-
     test("Ship should have a defined amount of HP", () => {
       // expected outcomes
     });
