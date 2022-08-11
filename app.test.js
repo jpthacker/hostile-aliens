@@ -3,32 +3,93 @@
 // Preliminary requirements
 
 describe("Hostile Aliens Game", ( => {
+
   describe("HTML Function", () => {
-  
+    // function
+    test("Should generate the correct HTML", () => {
+      // expected output
+    })
+    test("Should target the defined container", () => {
+      // expected output
+    })
+  })  
+
+  describe("Fleet Array", () => {
+    // fleet array
+    // ship objects
+    test("Should store ship data in correct way", () => {
+      // expected outcome
+    })
+  })
+
+  describe("Alien Ship Class", () => {
+    // object based on class
+    // fleet array
+    test("Should create ship object and assign to fleet array", () => {
+
+    })
+
+    test("Ship should have a defined amount of HP", () => {
+      // expected outcomes
+    })
+
+    test("Ship should suffer a defined amount of damage", () => {
+      // expected outcomes
+    })
+
+    test("Ship should generate correct HTML", () => {
+      // expected outcomes
+    })
+
+    test("Ship should get destroyed when HP = 0", () => {
+      // expected outcomes (unhittable + no HTML)
+    })
+  })
+
+  describe("Mother Ship Class", () => {
+    test("Should destroy fleet if HP reaches ZERO", () => {
+      // expected outcomes
+    })
+  })
+
+  describe("BTN Class", () => {
+    // btn object
+    test("Should hit a random ship", () => {
+      // expected outcomes
+    })
+
+    test("Should reduce targeted ship's HP on a hit", () => {
+      // expected outcomes
+    })
+  })
+
+  describe("Scores Class", () => {
+    // score objects
+    test("Should source a score from an array of objects by summing up specific key: value", () => {
+      // expected outcomes
+    })
+    test("Should generate HTML for each score", () => {
+      // expected outcomes
+    })
+  })
+
+  describe("Game Over Function", () => {
+    // function
+    // fleet object
+    test("Should load HTML if all ships are destroyed", () => {
+      // expected outcomes
+    })
+  })
+
+  describe("Restart Btn Function", () => {
+    // btn function
+    // fleet array
+    test("Should load correct HTML", () => {
+      // expected outcome
+    })
+
+    test("Should restore game data to default", () => {
+      // expected outcomes
+    })
   })
 }))
-
-// HTML FUNCTION
-// The function should generate the correct HTML
-
-// ALIEN SHIP CLASS
-// Should create an alien ship with a defined amount of hit points
-// The alien ship should suffer a specified amount of damage if hit
-// The creation of each ship should generate HTML
-// I the ship reaches zero hit points it should be destroyed (unhittable + no HTML)
-
-// MOTHER SHIP CLASS
-// Should destroy all other ships if HP reaches 0
-
-// BTN CLASS
-// Should hit a random ship (ships as array?)
-
-// SCORES CLASS
-// Should source a score from an array of objects by summing up specific key: value
-// should generate HTML for each score
-
-// GAME OVER FUNCTION
-// Should load HTML if all ships are destroyed
-
-// BTN FUNCTION
-// Should restart game if clicked
