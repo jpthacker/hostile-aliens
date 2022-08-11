@@ -1,0 +1,16 @@
+{
+  "name": "hostile-aliens",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"jest"
+  },
+  "keywords": [],
+  "author": "Jack Thacker",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^28.1.3",
+    "sass": "^1.54.4"
+  }
+}
