@@ -1,20 +1,20 @@
-// HOSTILE ALIENS GAME
+import * as game from "./app.js";
+game.getNewGameHTML();
 
 // Preliminary requirements
 
-describe("Hostile Aliens Game", ( => {
+describe("Hostile Aliens Game", () => {
 
   describe("HTML Function", () => {
-    // function
     test("Should generate the correct HTML", () => {
-      // expected output
+      expect(game.getNewGameHTML(1,2)).toBe(3);
     })
     test("Should target the defined container", () => {
       // expected output
     })
   })  
 
-  describe("Fleet Array", () => {
+  xdescribe("Fleet Array", () => {
     // fleet array
     // ship objects
     test("Should store ship data in correct way", () => {
@@ -22,7 +22,7 @@ describe("Hostile Aliens Game", ( => {
     })
   })
 
-  describe("Alien Ship Class", () => {
+  xdescribe("Alien Ship Class", () => {
     // object based on class
     // fleet array
     test("Should create ship object and assign to fleet array", () => {
@@ -46,13 +46,13 @@ describe("Hostile Aliens Game", ( => {
     })
   })
 
-  describe("Mother Ship Class", () => {
+  xdescribe("Mother Ship Class", () => {
     test("Should destroy fleet if HP reaches ZERO", () => {
       // expected outcomes
     })
   })
 
-  describe("BTN Class", () => {
+  xdescribe("BTN Class", () => {
     // btn object
     test("Should hit a random ship", () => {
       // expected outcomes
@@ -63,7 +63,7 @@ describe("Hostile Aliens Game", ( => {
     })
   })
 
-  describe("Scores Class", () => {
+  xdescribe("Scores Class", () => {
     // score objects
     test("Should source a score from an array of objects by summing up specific key: value", () => {
       // expected outcomes
@@ -73,7 +73,7 @@ describe("Hostile Aliens Game", ( => {
     })
   })
 
-  describe("Game Over Function", () => {
+  xdescribe("Game Over Function", () => {
     // function
     // fleet object
     test("Should load HTML if all ships are destroyed", () => {
@@ -81,7 +81,7 @@ describe("Hostile Aliens Game", ( => {
     })
   })
 
-  describe("Restart Btn Function", () => {
+  xdescribe("Restart Btn Function", () => {
     // btn function
     // fleet array
     test("Should load correct HTML", () => {
@@ -92,4 +92,4 @@ describe("Hostile Aliens Game", ( => {
       // expected outcomes
     })
   })
-}))
+});
