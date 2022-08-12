@@ -4,6 +4,8 @@ game.getNewGameHTML();
 // Preliminary requirements
 
 describe("Hostile Aliens Game", () => {
+  const testShip1 = new game.Ship("test", 45, 12, "test-ship");
+  const testShip2 = new game.Ship("test", 60, 15, "test-ship");
   describe("HTML Function", () => {
     test("Should generate the correct HTML", () => {
       expect(game.getNewGameHTML()).toBe(`
@@ -20,33 +22,53 @@ describe("Hostile Aliens Game", () => {
     });
   });
 
-  xdescribe("Fleet Array Function", () => {
-    // fleet array function
-    // ship objects
-    test("Should create ship object and assign to fleet array", () => {
-      // expected outcomes
+  describe("Fleet Array Function", () => {
+    class Ship extends game.Ship {}
+    class Mothership extends game.Mothership {}
+    test("Should create ship objects and assign them to fleet array", () => {
+      expect(game.generateAllShips(0, 0, 1)).toStrictEqual([
+        { damage: 9, hp: 100, html: "attack-ship", type: "Attack Ship" },
+      ]);
+      expect(game.generateAllShips(1, 2, 3)).toStrictEqual([
+        { damage: 9, hp: 100, html: "mothership", type: "Mothership" },
+        { damage: 9, hp: 100, html: "defence-ship", type: "Defence Ship" },
+        { damage: 9, hp: 100, html: "defence-ship", type: "Defence Ship" },
+        { damage: 9, hp: 100, html: "attack-ship", type: "Attack Ship" },
+        { damage: 9, hp: 100, html: "attack-ship", type: "Attack Ship" },
+        { damage: 9, hp: 100, html: "attack-ship", type: "Attack Ship" },
+      ]);
     });
     test("Should store ship data in correct way", () => {
-      // expected outcome
+      expect(game.generateAllShips(1, 1, 1)).toStrictEqual([
+        { damage: 9, hp: 100, html: "mothership", type: "Mothership" },
+        { damage: 9, hp: 100, html: "defence-ship", type: "Defence Ship" },
+        { damage: 9, hp: 100, html: "attack-ship", type: "Attack Ship" },
+      ]);
     });
   });
 
-  xdescribe("Alien Ship Class", () => {
-    // object based on class
-    // fleet array
+  describe("Alien Ship Class", () => {
     test("Ship should have a defined amount of HP", () => {
-      // expected outcomes
+      expect(testShip1.getShipHP()).toBe(45);
+      expect(testShip2.getShipHP()).toBe(60);
     });
 
     test("Ship should suffer a defined amount of damage", () => {
-      // expected outcomes
+      testShip1.applyShipDamage();
+      testShip2.applyShipDamage();
+      expect(testShip1.getShipHP()).toBe(33);
+      expect(testShip2.getShipHP()).toBe(45);
     });
 
     test("Ship should generate correct HTML", () => {
-      // expected outcomes
+      expect(testShip1.generateShipHTML("h3")).toBe(`
+    <div class="ship__container">
+      <h3>test</h3>
+    </div>
+    `);
     });
 
-    test("Ship should get destroyed when HP = 0", () => {
+    xtest("Ship should get destroyed when HP = 0", () => {
       // expected outcomes (unhittable + no HTML)
     });
   });

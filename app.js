@@ -1,7 +1,7 @@
 // HOSTILE ALIENS GAME
 
 // Generates new game html
-const gameContainer = document.querySelector(".game");
+// const gameContainer = document.querySelector(".game");
 export const getNewGameHTML = () => {
   return `
     <div class="game">
@@ -15,11 +15,7 @@ export const getNewGameHTML = () => {
     </div>
     `;
 };
-gameContainer.innerHTML = getNewGameHTML();
-
-// Generates the fleet Array (STILL TO TEST)
-export const fleet = [];
-export const generateShips = () => {};
+// gameContainer.innerHTML = getNewGameHTML();
 
 // Alien ship class
 export class Ship {
@@ -38,19 +34,41 @@ export class Ship {
     this.hp = this.hp - this.damage;
   }
 
-  generateShipHTML(container, titleType) {
-    container.innerHTML += `
+  generateShipHTML(titleType) {
+    return `
     <div class="ship__container">
-      <${textSize}>${this.name}</${titleType}>
+      <${titleType}>${this.type}</${titleType}>
     </div>
     `;
   }
 
-  // Destroy ship function?
+  // Destroy ship function (STILL TO TEST)?
 }
 
-// export class MotherShip extends ship {
-//   constructor(type, hp, damage, html) {
-//     super(type, hp, damage, html);
-//   }
-// }
+export class Mothership extends Ship {
+  constructor(type, hp, damage, html) {
+    super(type, hp, damage, html);
+  }
+}
+
+// Generates the fleet Array
+export const generateAllShips = (
+  mothershipAmount,
+  defenceShipAmount,
+  attackShipAmount
+) => {
+  const mothership = new Mothership("Mothership", 100, 9, "mothership");
+  const defenceShip = new Ship("Defence Ship", 100, 9, "defence-ship");
+  const attackShip = new Ship("Attack Ship", 100, 9, "attack-ship");
+  const fleet = [];
+  for (let i = 0; i < mothershipAmount; i++) {
+    fleet.push({ ...mothership });
+  }
+  for (let i = 0; i < defenceShipAmount; i++) {
+    fleet.push({ ...defenceShip });
+  }
+  for (let i = 0; i < attackShipAmount; i++) {
+    fleet.push({ ...attackShip });
+  }
+  return fleet;
+};
