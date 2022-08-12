@@ -1,7 +1,4 @@
 import * as game from "./app.js";
-game.getNewGameHTML();
-
-// Preliminary requirements
 
 describe("Hostile Aliens Game", () => {
   const testShip1 = new game.Ship("test", 45, 12, "test-ship");
@@ -23,27 +20,28 @@ describe("Hostile Aliens Game", () => {
   });
 
   describe("Fleet Array Function", () => {
-    class Ship extends game.Ship {}
-    class Mothership extends game.Mothership {}
     test("Should create ship objects and assign them to fleet array", () => {
-      expect(game.generateAllShips(0, 0, 1)).toStrictEqual([
-        { damage: 9, hp: 100, html: "attack-ship", type: "Attack Ship" },
-      ]);
-      expect(game.generateAllShips(1, 2, 3)).toStrictEqual([
-        { damage: 9, hp: 100, html: "mothership", type: "Mothership" },
-        { damage: 9, hp: 100, html: "defence-ship", type: "Defence Ship" },
-        { damage: 9, hp: 100, html: "defence-ship", type: "Defence Ship" },
-        { damage: 9, hp: 100, html: "attack-ship", type: "Attack Ship" },
-        { damage: 9, hp: 100, html: "attack-ship", type: "Attack Ship" },
-        { damage: 9, hp: 100, html: "attack-ship", type: "Attack Ship" },
-      ]);
-    });
-    test("Should store ship data in correct way", () => {
-      expect(game.generateAllShips(1, 1, 1)).toStrictEqual([
-        { damage: 9, hp: 100, html: "mothership", type: "Mothership" },
-        { damage: 9, hp: 100, html: "defence-ship", type: "Defence Ship" },
-        { damage: 9, hp: 100, html: "attack-ship", type: "Attack Ship" },
-      ]);
+      const singleShipArr = game.generateAllShips(
+        game.Mothership,
+        0,
+        game.Ship,
+        0,
+        game.Ship,
+        1
+      );
+      const multipleShipArr = game.generateAllShips(
+        game.Mothership,
+        1,
+        game.Ship,
+        2,
+        game.Ship,
+        3
+      );
+      expect(singleShipArr[0].getShipHP()).toBe(45);
+      expect(multipleShipArr[0].type).toBe("Mothership");
+      expect(multipleShipArr[1].type).toBe("Defence Ship");
+      expect(multipleShipArr[5].type).toBe("Attack Ship");
+      expect(multipleShipArr.length).toBe(6);
     });
   });
 
@@ -79,14 +77,25 @@ describe("Hostile Aliens Game", () => {
     });
   });
 
-  xdescribe("BTN Class", () => {
-    // btn object
-    test("Should hit a random ship", () => {
-      // expected outcomes
+  describe("BTN Function", () => {
+    const multipleShipArr = game.generateAllShips(
+      game.Mothership,
+      0,
+      game.Ship,
+      0,
+      game.Ship,
+      3
+    );
+    game.hitRandomShip(multipleShipArr);
+    const filteredShipArr = multipleShipArr.filter((ship) => {
+      return ship.hp === 33;
     });
-
+    test("Should hit a random ship", () => {
+      expect(filteredShipArr.length).toBe(1);
+    });
+    game.hitRandomShip(filteredShipArr);
     test("Should reduce targeted ship's HP on a hit", () => {
-      // expected outcomes
+      expect(filteredShipArr[0].hp).toBe(21);
     });
   });
 
@@ -108,7 +117,7 @@ describe("Hostile Aliens Game", () => {
     });
   });
 
-  xdescribe("Restart Btn Function", () => {
+  describe("Restart Btn Function", () => {
     // btn function
     // fleet array
     test("Should load correct HTML", () => {

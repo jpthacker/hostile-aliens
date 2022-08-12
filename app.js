@@ -51,24 +51,28 @@ export class Mothership extends Ship {
   }
 }
 
-// Generates the fleet Array
+// Generates an array of ships
 export const generateAllShips = (
-  mothershipAmount,
-  defenceShipAmount,
-  attackShipAmount
+  class1,
+  class1Amount,
+  class2,
+  class2Amount,
+  class3,
+  class3Amount
 ) => {
-  const mothership = new Mothership("Mothership", 100, 9, "mothership");
-  const defenceShip = new Ship("Defence Ship", 100, 9, "defence-ship");
-  const attackShip = new Ship("Attack Ship", 100, 9, "attack-ship");
   const fleet = [];
-  for (let i = 0; i < mothershipAmount; i++) {
-    fleet.push({ ...mothership });
+  for (let i = 0; i < class1Amount; i++) {
+    fleet.push(new class1("Mothership", 100, 9, "mothership"));
   }
-  for (let i = 0; i < defenceShipAmount; i++) {
-    fleet.push({ ...defenceShip });
+  for (let i = 0; i < class2Amount; i++) {
+    fleet.push(new class2("Defence Ship", 80, 10, "defence-ship"));
   }
-  for (let i = 0; i < attackShipAmount; i++) {
-    fleet.push({ ...attackShip });
+  for (let i = 0; i < class3Amount; i++) {
+    fleet.push(new class3("Attack Ship", 45, 12, "attack-ship"));
   }
   return fleet;
+};
+
+export const hitRandomShip = (fleet) => {
+  fleet[Math.floor(Math.random() * fleet.length)].applyShipDamage();
 };
