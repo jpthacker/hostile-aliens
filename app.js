@@ -24,23 +24,6 @@ export class Ship {
     </div>
     `;
   }
-
-  // Destroy ship function (STILL TO TEST)?
-}
-
-export class Mothership extends Ship {
-  constructor(type, hp, damage, html) {
-    super(type, hp, damage, html);
-  }
-
-  getScore(titleType, scoreType) {
-    return `
-    <div class="score--mothership">
-      <${titleType}>${this.type}</${titleType}>
-      <${scoreType}>${super.getShipHP()}</${scoreType}>
-    </div>
-    `;
-  }
 }
 
 // Generates an array of ships
@@ -94,3 +77,20 @@ export const getScores = (fleet) => {
   return shipScores;
 };
 // const currentScores = getScores(...);
+
+const generateScoresHTML = (container, scores, titleType) => {
+  container.innerHTML = `
+  <div>
+    <${titleType}>MOTHERSHIP</${titleType}>
+    <${titleType}>${scores[0]}</${titleType}>
+  </div>
+  <div>
+    <${titleType}>DEFENCE SHIPS</${titleType}>
+    <${titleType}>${scores[1]}</${titleType}>
+  </div>
+  <div>
+    <${titleType}>ATTACK SHIPS</${titleType}>
+    <${titleType}>${scores[2]}</${titleType}>
+  </div>
+  `;
+};

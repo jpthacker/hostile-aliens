@@ -87,12 +87,6 @@ describe("Hostile Aliens Game", () => {
     });
   });
 
-  xdescribe("Mother Ship Class", () => {
-    test("Should destroy fleet if HP reaches ZERO", () => {
-      // expected outcomes
-    });
-  });
-
   describe("BTN Function", () => {
     game.hitRandomShip(multipleShipArr);
     const filteredShipArr = multipleShipArr.filter((ship) => {
