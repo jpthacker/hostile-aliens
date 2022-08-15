@@ -3,22 +3,11 @@ import * as game from "./app.js";
 describe("Hostile Aliens Game", () => {
   const testShip1 = new game.Ship("test", 45, 12, "test-ship");
   const testShip2 = new game.Ship("test", 60, 15, "test-ship");
-  const singleShipArr = game.generateAllShips(
-    game.Mothership,
-    0,
-    game.Ship,
-    0,
-    game.Ship,
-    1
-  );
-  const multipleShipArr = game.generateAllShips(
-    game.Mothership,
-    1,
-    game.Ship,
-    2,
-    game.Ship,
-    3
-  );
+  const testShip3 = new game.Ship("test", 10, 15, "test-ship");
+  const testShip4 = new game.Ship("test", 0, 15, "test-ship");
+  const singleShipArr = game.generateAllShips(game.Ship, 0, 0, 1);
+  const multipleShipArr = game.generateAllShips(game.Ship, 1, 2, 3);
+  const testShipArr = [testShip1, testShip2, testShip3, testShip4];
   // Generates new game html
   // // const gameContainer = document.querySelector(".game");
   // export const getNewGameHTML = () => {
@@ -106,9 +95,17 @@ describe("Hostile Aliens Game", () => {
       expect(game.getScores(singleShipArr)).toStrictEqual([0, 0, 1]);
       expect(game.getScores(multipleShipArr)).toStrictEqual([100, 2, 3]);
     });
-    // test("Should generate HTML for each score", () => {
-    //   // expected outcomes
-    // });
+  });
+
+  describe("Dsetroy Ship Function", () => {
+    test("Should filter fleet array if ship score is below 1", () => {
+      expect(game.destroyShip(testShipArr)).toStrictEqual([
+        testShip1,
+        testShip2,
+        testShip3,
+      ]);
+      expect(game.destroyShip(multipleShipArr)).toStrictEqual(multipleShipArr);
+    });
   });
 
   xdescribe("Game Over Function", () => {

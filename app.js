@@ -28,36 +28,34 @@ export class Ship {
 
 // Generates an array of ships
 export const generateAllShips = (
-  class1,
-  class1Amount,
-  class2,
-  class2Amount,
-  class3,
-  class3Amount
+  shipClass,
+  mothershipAmount,
+  defenceShipAmount,
+  attackShipAmount
 ) => {
   const fleet = [];
-  for (let i = 0; i < class1Amount; i++) {
-    fleet.push(new class1("Mothership", 100, 9, "mothership"));
+  for (let i = 0; i < mothershipAmount; i++) {
+    fleet.push(new shipClass("Mothership", 100, 9, "mothership"));
   }
-  for (let i = 0; i < class2Amount; i++) {
-    fleet.push(new class2("Defence Ship", 80, 10, "defence-ship"));
+  for (let i = 0; i < defenceShipAmount; i++) {
+    fleet.push(new shipClass("Defence Ship", 80, 10, "defence-ship"));
   }
-  for (let i = 0; i < class3Amount; i++) {
-    fleet.push(new class3("Attack Ship", 45, 12, "attack-ship"));
+  for (let i = 0; i < attackShipAmount; i++) {
+    fleet.push(new shipClass("Attack Ship", 45, 12, "attack-ship"));
   }
   return fleet;
 };
 
-export const hitRandomShip = (fleet) => {
-  fleet[Math.floor(Math.random() * fleet.length)].applyShipDamage();
+export const hitRandomShip = (fleetArr) => {
+  fleetArr[Math.floor(Math.random() * fleetArr.length)].applyShipDamage();
 };
 
 // const scores = document.querySelector(".scores__container");
-export const getScores = (fleet) => {
+export const getScores = (fleetArr) => {
   let mothership = 0;
   let defenceShips = 0;
   let attackShips = 0;
-  fleet.forEach((ship) => {
+  fleetArr.forEach((ship) => {
     switch (ship.type) {
       case "Mothership":
         mothership = ship.getShipHP();
@@ -93,4 +91,9 @@ const generateScoresHTML = (container, scores, titleType) => {
     <${titleType}>${scores[2]}</${titleType}>
   </div>
   `;
+};
+
+export const destroyShip = (fleetArr) => {
+  const filteredFleetArr = fleetArr.filter((ship) => ship.hp > 0);
+  return filteredFleetArr;
 };
