@@ -3,40 +3,56 @@ import * as game from "./app.js";
 describe("Hostile Aliens Game", () => {
   const testShip1 = new game.Ship("test", 45, 12, "test-ship");
   const testShip2 = new game.Ship("test", 60, 15, "test-ship");
-  describe("HTML Function", () => {
-    test("Should generate the correct HTML", () => {
-      expect(game.getNewGameHTML()).toBe(`
-    <div class="game">
-      <h1 class="game__title">Hostile Aliens</h1>
-      <h4 class="game__subtitle">Shoot to attack the ships</h4>
-      <div class="scores">
-        <h2 class="scores__title"></h2>
-        <div class="scores__container"></div>
-      </div>
-      <div class="ships"></div>
-    </div>
-    `);
-    });
-  });
+  const singleShipArr = game.generateAllShips(
+    game.Mothership,
+    0,
+    game.Ship,
+    0,
+    game.Ship,
+    1
+  );
+  const multipleShipArr = game.generateAllShips(
+    game.Mothership,
+    1,
+    game.Ship,
+    2,
+    game.Ship,
+    3
+  );
+  // Generates new game html
+  // // const gameContainer = document.querySelector(".game");
+  // export const getNewGameHTML = () => {
+  //   return `
+  //     <div class="game">
+  //       <h1 class="game__title">Hostile Aliens</h1>
+  //       <h4 class="game__subtitle">Shoot to attack the ships</h4>
+  //       <div class="scores">
+  //         <h2 class="scores__title"></h2>
+  //         <div class="scores__container"></div>
+  //       </div>
+  //       <div class="ships"></div>
+  //     </div>
+  //     `;
+  // };
+  // // gameContainer.innerHTML = getNewGameHTML();
+  // describe("HTML Function", () => {
+  //   test("Should generate the correct HTML", () => {
+  //     expect(game.getNewGameHTML()).toBe(`
+  //   <div class="game">
+  //     <h1 class="game__title">Hostile Aliens</h1>
+  //     <h4 class="game__subtitle">Shoot to attack the ships</h4>
+  //     <div class="scores">
+  //       <h2 class="scores__title"></h2>
+  //       <div class="scores__container"></div>
+  //     </div>
+  //     <div class="ships"></div>
+  //   </div>
+  //   `);
+  //   });
+  // });
 
   describe("Fleet Array Function", () => {
     test("Should create ship objects and assign them to fleet array", () => {
-      const singleShipArr = game.generateAllShips(
-        game.Mothership,
-        0,
-        game.Ship,
-        0,
-        game.Ship,
-        1
-      );
-      const multipleShipArr = game.generateAllShips(
-        game.Mothership,
-        1,
-        game.Ship,
-        2,
-        game.Ship,
-        3
-      );
       expect(singleShipArr[0].getShipHP()).toBe(45);
       expect(multipleShipArr[0].type).toBe("Mothership");
       expect(multipleShipArr[1].type).toBe("Defence Ship");
@@ -78,14 +94,6 @@ describe("Hostile Aliens Game", () => {
   });
 
   describe("BTN Function", () => {
-    const multipleShipArr = game.generateAllShips(
-      game.Mothership,
-      0,
-      game.Ship,
-      0,
-      game.Ship,
-      3
-    );
     game.hitRandomShip(multipleShipArr);
     const filteredShipArr = multipleShipArr.filter((ship) => {
       return ship.hp === 33;
@@ -99,14 +107,14 @@ describe("Hostile Aliens Game", () => {
     });
   });
 
-  xdescribe("Scores Class", () => {
-    // score objects
-    test("Should source a score from an array of objects by summing up specific key: value", () => {
-      // expected outcomes
+  describe("Scores Function", () => {
+    test("Should source a score from an array of objects", () => {
+      expect(game.getScores(singleShipArr)).toStrictEqual([0, 0, 1]);
+      expect(game.getScores(multipleShipArr)).toStrictEqual([100, 2, 3]);
     });
-    test("Should generate HTML for each score", () => {
-      // expected outcomes
-    });
+    // test("Should generate HTML for each score", () => {
+    //   // expected outcomes
+    // });
   });
 
   xdescribe("Game Over Function", () => {

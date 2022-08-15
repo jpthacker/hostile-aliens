@@ -1,22 +1,5 @@
 // HOSTILE ALIENS GAME
 
-// Generates new game html
-// const gameContainer = document.querySelector(".game");
-export const getNewGameHTML = () => {
-  return `
-    <div class="game">
-      <h1 class="game__title">Hostile Aliens</h1>
-      <h4 class="game__subtitle">Shoot to attack the ships</h4>
-      <div class="scores">
-        <h2 class="scores__title"></h2>
-        <div class="scores__container"></div>
-      </div>
-      <div class="ships"></div>
-    </div>
-    `;
-};
-// gameContainer.innerHTML = getNewGameHTML();
-
 // Alien ship class
 export class Ship {
   constructor(type, hp, damage, html) {
@@ -49,6 +32,15 @@ export class Mothership extends Ship {
   constructor(type, hp, damage, html) {
     super(type, hp, damage, html);
   }
+
+  getScore(titleType, scoreType) {
+    return `
+    <div class="score--mothership">
+      <${titleType}>${this.type}</${titleType}>
+      <${scoreType}>${super.getShipHP()}</${scoreType}>
+    </div>
+    `;
+  }
 }
 
 // Generates an array of ships
@@ -76,3 +68,29 @@ export const generateAllShips = (
 export const hitRandomShip = (fleet) => {
   fleet[Math.floor(Math.random() * fleet.length)].applyShipDamage();
 };
+
+// const scores = document.querySelector(".scores__container");
+export const getScores = (fleet) => {
+  let mothership = 0;
+  let defenceShips = 0;
+  let attackShips = 0;
+  fleet.forEach((ship) => {
+    switch (ship.type) {
+      case "Mothership":
+        mothership = ship.getShipHP();
+        break;
+      case "Defence Ship":
+        if (ship.hp > 0) {
+          defenceShips += 1;
+        }
+        break;
+      case "Attack Ship":
+        if (ship.hp > 0) {
+          attackShips += 1;
+        }
+    }
+  });
+  const shipScores = [mothership, defenceShips, attackShips];
+  return shipScores;
+};
+// const currentScores = getScores(...);
