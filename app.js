@@ -46,6 +46,12 @@ export const generateAllShips = (
   return fleet;
 };
 
+export const generateShipsHTML = (fleetArr, container, titleType) => {
+  fleetArr.forEach((ship) => {
+    container.innerHTML += ship.generateShipHTML(titleType);
+  });
+};
+
 export const hitRandomShip = (fleetArr) => {
   fleetArr[Math.floor(Math.random() * fleetArr.length)].applyShipDamage();
 };
@@ -91,4 +97,11 @@ export const destroyShip = (fleetArr) => {
   return filteredFleetArr;
 };
 
-export const loadGameOver = (fleetArr) => {};
+export const loadGameOver = (fleetArr, gameContainer, gameOverContainer) => {
+  if (!fleetArr[0]) {
+    gameContainer.classList.add("hidden");
+    gameOverContainer.classList.remove("hidden");
+  }
+};
+
+export const restartGame = () => {};

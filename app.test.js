@@ -7,38 +7,8 @@ describe("Hostile Aliens Game", () => {
   const testShip4 = new game.Ship("test", 0, 15, "test-ship");
   const singleShipArr = game.generateAllShips(game.Ship, 0, 0, 1);
   const multipleShipArr = game.generateAllShips(game.Ship, 1, 2, 3);
-  const testShipArr = [testShip1, testShip2, testShip3, testShip4];
-  // Generates new game html
-  // // const gameContainer = document.querySelector(".game");
-  // export const getNewGameHTML = () => {
-  //   return `
-  //     <div class="game">
-  //       <h1 class="game__title">Hostile Aliens</h1>
-  //       <h4 class="game__subtitle">Shoot to attack the ships</h4>
-  //       <div class="scores">
-  //         <h2 class="scores__title"></h2>
-  //         <div class="scores__container"></div>
-  //       </div>
-  //       <div class="ships"></div>
-  //     </div>
-  //     `;
-  // };
-  // // gameContainer.innerHTML = getNewGameHTML();
-  // describe("HTML Function", () => {
-  //   test("Should generate the correct HTML", () => {
-  //     expect(game.getNewGameHTML()).toBe(`
-  //   <div class="game">
-  //     <h1 class="game__title">Hostile Aliens</h1>
-  //     <h4 class="game__subtitle">Shoot to attack the ships</h4>
-  //     <div class="scores">
-  //       <h2 class="scores__title"></h2>
-  //       <div class="scores__container"></div>
-  //     </div>
-  //     <div class="ships"></div>
-  //   </div>
-  //   `);
-  //   });
-  // });
+  const testShipArr1 = [testShip1, testShip2, testShip3, testShip4];
+  const testShipArr2 = [testShip4];
 
   describe("Fleet Array Function", () => {
     test("Should create ship objects and assign them to fleet array", () => {
@@ -70,10 +40,6 @@ describe("Hostile Aliens Game", () => {
     </div>
     `);
     });
-
-    xtest("Ship should get destroyed when HP = 0", () => {
-      // expected outcomes (unhittable + no HTML)
-    });
   });
 
   describe("BTN Function", () => {
@@ -99,32 +65,13 @@ describe("Hostile Aliens Game", () => {
 
   describe("Dsetroy Ship Function", () => {
     test("Should filter fleet array if ship score is below 1", () => {
-      expect(game.destroyShip(testShipArr)).toStrictEqual([
+      expect(game.destroyShip(testShipArr1)).toStrictEqual([
         testShip1,
         testShip2,
         testShip3,
       ]);
       expect(game.destroyShip(multipleShipArr)).toStrictEqual(multipleShipArr);
-    });
-  });
-
-  xdescribe("Game Over Function", () => {
-    // function
-    // fleet object
-    test("Should load HTML if all ships are destroyed", () => {
-      // expected outcomes
-    });
-  });
-
-  describe("Restart Btn Function", () => {
-    // btn function
-    // fleet array
-    test("Should load correct HTML", () => {
-      // expected outcome
-    });
-
-    test("Should restore game data to default", () => {
-      // expected outcomes
+      expect(game.destroyShip(testShipArr2)).toStrictEqual([]);
     });
   });
 });
