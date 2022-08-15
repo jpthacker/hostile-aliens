@@ -52,26 +52,19 @@ export const hitRandomShip = (fleetArr) => {
 
 // const scores = document.querySelector(".scores__container");
 export const getScores = (fleetArr) => {
-  let mothership = 0;
-  let defenceShips = 0;
-  let attackShips = 0;
+  const shipScores = [0, 0, 0];
   fleetArr.forEach((ship) => {
     switch (ship.type) {
       case "Mothership":
-        mothership = ship.getShipHP();
+        shipScores[0] = ship.getShipHP();
         break;
       case "Defence Ship":
-        if (ship.hp > 0) {
-          defenceShips += 1;
-        }
+        shipScores[1] += 1;
         break;
       case "Attack Ship":
-        if (ship.hp > 0) {
-          attackShips += 1;
-        }
+        shipScores[2] += 1;
     }
   });
-  const shipScores = [mothership, defenceShips, attackShips];
   return shipScores;
 };
 // const currentScores = getScores(...);
@@ -97,3 +90,5 @@ export const destroyShip = (fleetArr) => {
   const filteredFleetArr = fleetArr.filter((ship) => ship.hp > 0);
   return filteredFleetArr;
 };
+
+export const loadGameOver = (fleetArr) => {};
