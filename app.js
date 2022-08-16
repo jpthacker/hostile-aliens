@@ -98,16 +98,16 @@ const startingScores = getScores(fleetOfShipsArr);
 const scoresContainer = document.querySelector(".scores__container");
 const generateScoresHTML = (container, scores, titleType) => {
   container.innerHTML = `
-  <div>
-    <${titleType}>MOTHERSHIP</${titleType}>
+  <div class="scores__ship-container">
+    <${titleType} class="scores__ship">MOTHERSHIP</${titleType}>
     <${titleType}>${scores[0]}</${titleType}>
   </div>
-  <div>
-    <${titleType}>DEFENCE SHIPS</${titleType}>
+  <div class="scores__ship-container">
+    <${titleType} class="scores__ship">DEFENCE SHIPS</${titleType}>
     <${titleType}>${scores[1]}</${titleType}>
   </div>
-  <div>
-    <${titleType}>ATTACK SHIPS</${titleType}>
+  <div class="scores__ship-container">
+    <${titleType} class="scores__ship">ATTACK SHIPS</${titleType}>
     <${titleType}>${scores[2]}</${titleType}>
   </div>
   `;

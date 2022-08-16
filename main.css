@@ -3,20 +3,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-image: radial-gradient(circle, #c4d7b9, #7f9771);
   background-image: none;
 }
 
 body {
   text-align: center;
   color: #333431;
-  min-height: 100%;
-  background-image: radial-gradient(circle, #c4d7b9, #7f9771);
+  min-height: 100vh;
+  max-height: 100vh;
+  border: solid 1px #7f9771;
+  background-image: radial-gradient(circle, #c4d7b9, #c4d7b9, #7f9771);
 }
 
 h3 {
-  font-family: "Codystar", cursive;
-  font-size: 1.25em;
+  font-family: "VT323", monospace;
+  font-size: 1.5em;
 }
 
 .game__container {
@@ -28,7 +29,7 @@ h3 {
 .game {
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
+  row-gap: 24px;
 }
 .game__title {
   font-family: "Press Start 2P", cursive;
@@ -42,15 +43,14 @@ h3 {
 .scores {
   border: solid 1px #333431;
   border-radius: 15px;
-  max-width: 60vw;
-  min-width: 60vw;
+  max-width: 50vw;
+  min-width: 50vw;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  row-gap: 5px;
-  padding: 5px;
+  row-gap: 15px;
+  padding: 15px;
 }
-
 .scores__container {
   max-width: 80%;
   min-width: 80%;
@@ -59,20 +59,27 @@ h3 {
   justify-content: space-evenly;
   margin: 0 auto;
 }
-
 .scores__title {
-  font-family: "VT323", monospace;
+  font-family: "Press Start 2P", cursive;
+  font-size: 1.25em;
+}
+.scores__ship-container {
+  min-width: 150px;
+  min-height: 60px;
+}
+.scores__ship {
+  font-size: 1.8em;
 }
 
 .ships {
   border: solid 1px #333431;
   border-radius: 15px;
   padding: 15px;
-  max-width: 60vw;
-  min-width: 60vw;
+  max-width: 50vw;
+  min-width: 50vw;
   margin: 0 auto;
   display: grid;
-  gap: 30px 0px;
+  gap: 24px 0px;
   grid-template: ". . mothership . ." "defence-ship-1 . defence-ship-2 . defence-ship-3" ". defence-ship-4 . defence-ship-5 ." "attack-ship-1 . attack-ship-2 . attack-ship-3" ". attack-ship-4 . attack-ship-5 ." "attack-ship-6 . attack-ship-7 . attack-ship-8";
 }
 .ships__container--1 {
@@ -117,6 +124,49 @@ h3 {
 .ships__container--14 {
   grid-area: attack-ship-8;
 }
+.ships [class*=container] {
+  min-width: 150px;
+  min-height: 30px;
+}
+
+.ship__mothership {
+  font-size: 2em;
+}
+
+.ship__defence-ship {
+  font-size: 1.8em;
+}
+
+.game-over {
+  min-width: 90%;
+  min-height: 90%;
+  border: 1px solid red;
+}
+.game-over__title {
+  font-family: "Press Start 2P", cursive;
+  font-size: 3em;
+}
+
+button {
+  background-color: #333431;
+  color: #c4d7b9;
+  min-height: 40px;
+  max-height: 40px;
+  min-width: 150px;
+  max-width: 150px;
+  margin: 0 auto;
+  cursor: crosshair;
+  border: none;
+  border-radius: 10px;
+  font-family: "Press Start 2P", cursive;
+  font-size: large;
+}
+
+button:active {
+  background-color: #c4d7b9;
+  color: #333431;
+  border: solid 2px #333431;
+}
 
 .hidden {
   display: none;
@@ -124,7 +174,7 @@ h3 {
 }
 
 .sunk {
-  color: black;
+  color: #c4d7b9;
 }
 
 /*# sourceMappingURL=main.css.map */
