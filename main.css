@@ -21,12 +21,15 @@ h3 {
 }
 
 .game__container {
-  margin: 5vh auto;
-  max-width: 60vw;
-  padding: 20px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .game {
+  max-width: 60vw;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   row-gap: 24px;
@@ -161,9 +164,13 @@ h3 {
 }
 
 .game-over {
-  min-width: 90%;
-  min-height: 90%;
-  border: 1px solid red;
+  min-width: 40%;
+  min-height: 40%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5vh;
+  align-items: center;
+  justify-content: center;
 }
 .game-over__title {
   font-family: "Press Start 2P", cursive;
