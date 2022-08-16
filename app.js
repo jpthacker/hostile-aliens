@@ -28,13 +28,17 @@ class Ship {
     if (this.hp < 1) {
       return `
     <div class="ship__container sunk">
-      <${titleType}>${this.type}</${titleType}>
+      <${titleType} class="ship__${
+        this.html
+      }">${this.type.toUpperCase()}</${titleType}>
     </div>
     `;
     }
     return `
     <div class="ship__container">
-      <${titleType}>${this.type}</${titleType}>
+      <${titleType} class="ship__${
+      this.html
+    }">${this.type.toUpperCase()}</${titleType}>
     </div>
     `;
   }
