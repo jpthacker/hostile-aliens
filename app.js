@@ -24,10 +24,10 @@ class Ship {
     this.hp = this.hp - this.damage;
   }
 
-  generateShipHTML(titleType) {
+  generateShipHTML(titleType, i) {
     if (this.hp < 1) {
       return `
-    <div class="ship__container sunk">
+    <div class="ships__container--${i + 1} sunk">
       <${titleType} class="ship__${
         this.html
       }">${this.type.toUpperCase()}</${titleType}>
@@ -35,7 +35,7 @@ class Ship {
     `;
     }
     return `
-    <div class="ship__container">
+    <div class="ships__container--${i + 1}">
       <${titleType} class="ship__${
       this.html
     }">${this.type.toUpperCase()}</${titleType}>
@@ -72,9 +72,9 @@ generateShipArrays();
 
 const generateFleetHTML = (fleetArr, container, titleType) => {
   container.innerHTML = "";
-  fleetArr.forEach((ship) => {
-    container.innerHTML += ship.generateShipHTML(titleType);
-  });
+  for (let i = 0; i < fleetArr.length; i++) {
+    container.innerHTML += fleetArr[i].generateShipHTML(titleType, i);
+  }
 };
 
 const getScores = (fleetArr) => {
