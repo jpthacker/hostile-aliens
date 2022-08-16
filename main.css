@@ -137,6 +137,29 @@ h3 {
   font-size: 1.8em;
 }
 
+@keyframes hit {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  25% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  50% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  75% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  100% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+}
+.animated {
+  text-decoration: line-through;
+  animation-name: hit;
+  animation-duration: 0.25s;
+}
+
 .game-over {
   min-width: 90%;
   min-height: 90%;

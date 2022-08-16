@@ -24,6 +24,14 @@ class Ship {
     this.hp = this.hp - this.damage;
   }
 
+  targetShip() {
+    this.targeted = true;
+  }
+
+  untargetShip() {
+    this.targeted = false;
+  }
+
   generateShipHTML(titleType, i) {
     if (this.hp < 1) {
       return `
@@ -33,6 +41,14 @@ class Ship {
       }">${this.type.toUpperCase()}</${titleType}>
     </div>
     `;
+    } else if (this.targeted) {
+      return `
+      <div class="ships__container--${i + 1} animated">
+        <${titleType} class="ship__${
+        this.html
+      }">${this.type.toUpperCase()}</${titleType}>
+      </div>
+      `;
     }
     return `
     <div class="ships__container--${i + 1}">
@@ -119,10 +135,6 @@ const generateHTML = () => {
 };
 generateHTML();
 
-const hitRandomShip = (fleetArr) => {
-  fleetArr[Math.floor(Math.random() * fleetArr.length)].applyShipDamage();
-};
-
 const destroyShip = (fleetArr) => {
   const filteredFleetArr = fleetArr.filter((ship) => ship.hp > 0);
   return filteredFleetArr;
@@ -135,17 +147,20 @@ const loadGameOver = (fleetArr, gameContainer, gameOverContainer) => {
   }
 };
 
-const handleShootBtn = (fleetArr) => {
-  hitRandomShip(fleetArr);
-  filteredFleetArr = destroyShip(fleetArr);
+const hitRandomShip = (fleetArr) => {
+  const target = Math.floor(Math.random() * fleetArr.length);
+  fleetArr[target].applyShipDamage();
+  fleetArr[target].targetShip();
+};
+
+shootBtn.addEventListener("click", () => {
+  hitRandomShip(activeFleetArr);
+  filteredFleetArr = destroyShip(activeFleetArr);
   const currentScores = getScores(filteredFleetArr);
   generateScoresHTML(scoresContainer, currentScores, "h3");
   generateFleetHTML(fleetOfShipsArr, shipsContainer, "h3");
   activeFleetArr = filteredFleetArr;
-};
-
-shootBtn.addEventListener("click", () => {
-  handleShootBtn(activeFleetArr);
+  fleetOfShipsArr.forEach((ship) => ship.untargetShip());
   loadGameOver(activeFleetArr, gameContainer, gameOverContainer);
 });
 
