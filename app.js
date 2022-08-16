@@ -1,7 +1,14 @@
 // HOSTILE ALIENS GAME
+let fleetOfShipsArr = [];
+let activeFleetArr;
+const gameContainer = document.querySelector(".game");
+const shipsContainer = document.querySelector(".ships");
+const gameOverContainer = document.querySelector(".game-over");
+const shootBtn = document.querySelector(".game__btn");
+const restartBtn = document.querySelector(".game-over__btn");
 
 // Alien ship class
-export class Ship {
+class Ship {
   constructor(type, hp, damage, html) {
     this.type = type;
     this.hp = hp;
@@ -18,6 +25,13 @@ export class Ship {
   }
 
   generateShipHTML(titleType) {
+    if (this.hp < 1) {
+      return `
+    <div class="ship__container sunk">
+      <${titleType}>${this.type}</${titleType}>
+    </div>
+    `;
+    }
     return `
     <div class="ship__container">
       <${titleType}>${this.type}</${titleType}>
@@ -27,7 +41,7 @@ export class Ship {
 }
 
 // Generates an array of ships
-export const generateAllShips = (
+const generateAllShips = (
   shipClass,
   mothershipAmount,
   defenceShipAmount,
@@ -46,18 +60,20 @@ export const generateAllShips = (
   return fleet;
 };
 
-export const generateShipsHTML = (fleetArr, container, titleType) => {
+const generateShipArrays = () => {
+  fleetOfShipsArr = generateAllShips(Ship, 1, 5, 8);
+  activeFleetArr = fleetOfShipsArr;
+};
+generateShipArrays();
+
+const generateFleetHTML = (fleetArr, container, titleType) => {
+  container.innerHTML = "";
   fleetArr.forEach((ship) => {
     container.innerHTML += ship.generateShipHTML(titleType);
   });
 };
 
-export const hitRandomShip = (fleetArr) => {
-  fleetArr[Math.floor(Math.random() * fleetArr.length)].applyShipDamage();
-};
-
-// const scores = document.querySelector(".scores__container");
-export const getScores = (fleetArr) => {
+const getScores = (fleetArr) => {
   const shipScores = [0, 0, 0];
   fleetArr.forEach((ship) => {
     switch (ship.type) {
@@ -73,8 +89,9 @@ export const getScores = (fleetArr) => {
   });
   return shipScores;
 };
-// const currentScores = getScores(...);
+const startingScores = getScores(fleetOfShipsArr);
 
+const scoresContainer = document.querySelector(".scores__container");
 const generateScoresHTML = (container, scores, titleType) => {
   container.innerHTML = `
   <div>
@@ -92,16 +109,45 @@ const generateScoresHTML = (container, scores, titleType) => {
   `;
 };
 
-export const destroyShip = (fleetArr) => {
+const generateHTML = () => {
+  generateFleetHTML(fleetOfShipsArr, shipsContainer, "h3");
+  generateScoresHTML(scoresContainer, startingScores, "h3");
+};
+generateHTML();
+
+const hitRandomShip = (fleetArr) => {
+  fleetArr[Math.floor(Math.random() * fleetArr.length)].applyShipDamage();
+};
+
+const destroyShip = (fleetArr) => {
   const filteredFleetArr = fleetArr.filter((ship) => ship.hp > 0);
   return filteredFleetArr;
 };
 
-export const loadGameOver = (fleetArr, gameContainer, gameOverContainer) => {
+const loadGameOver = (fleetArr, gameContainer, gameOverContainer) => {
   if (!fleetArr[0]) {
     gameContainer.classList.add("hidden");
     gameOverContainer.classList.remove("hidden");
   }
 };
 
-export const restartGame = () => {};
+const handleShootBtn = (fleetArr) => {
+  hitRandomShip(fleetArr);
+  filteredFleetArr = destroyShip(fleetArr);
+  const currentScores = getScores(filteredFleetArr);
+  generateScoresHTML(scoresContainer, currentScores, "h3");
+  generateFleetHTML(fleetOfShipsArr, shipsContainer, "h3");
+  activeFleetArr = filteredFleetArr;
+};
+
+shootBtn.addEventListener("click", () => {
+  handleShootBtn(activeFleetArr);
+  loadGameOver(activeFleetArr, gameContainer, gameOverContainer);
+});
+
+restartBtn.addEventListener("click", () => {
+  gameContainer.classList.remove("hidden");
+  gameOverContainer.classList.add("hidden");
+  generateShipArrays();
+  generateHTML();
+});

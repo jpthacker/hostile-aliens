@@ -4,4 +4,24 @@
   box-sizing: border-box;
 }
 
+body {
+  text-align: center;
+}
+
+.game__container {
+  margin: 10vh auto;
+  max-width: 50vw;
+  border: solid 2px red;
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+  position: fixed;
+}
+
+.sunk {
+  color: white;
+}
+
 /*# sourceMappingURL=main.css.map */

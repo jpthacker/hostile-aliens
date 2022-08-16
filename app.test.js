@@ -10,16 +10,6 @@ describe("Hostile Aliens Game", () => {
   const testShipArr1 = [testShip1, testShip2, testShip3, testShip4];
   const testShipArr2 = [testShip4];
 
-  describe("Fleet Array Function", () => {
-    test("Should create ship objects and assign them to fleet array", () => {
-      expect(singleShipArr[0].getShipHP()).toBe(45);
-      expect(multipleShipArr[0].type).toBe("Mothership");
-      expect(multipleShipArr[1].type).toBe("Defence Ship");
-      expect(multipleShipArr[5].type).toBe("Attack Ship");
-      expect(multipleShipArr.length).toBe(6);
-    });
-  });
-
   describe("Alien Ship Class", () => {
     test("Ship should have a defined amount of HP", () => {
       expect(testShip1.getShipHP()).toBe(45);
@@ -42,7 +32,17 @@ describe("Hostile Aliens Game", () => {
     });
   });
 
-  describe("BTN Function", () => {
+  describe("Fleet Array Function", () => {
+    test("Should create ship objects and assign them to fleet array", () => {
+      expect(singleShipArr[0].getShipHP()).toBe(45);
+      expect(multipleShipArr[0].type).toBe("Mothership");
+      expect(multipleShipArr[1].type).toBe("Defence Ship");
+      expect(multipleShipArr[5].type).toBe("Attack Ship");
+      expect(multipleShipArr.length).toBe(6);
+    });
+  });
+
+  describe("Hit Random Ship Function", () => {
     game.hitRandomShip(multipleShipArr);
     const filteredShipArr = multipleShipArr.filter((ship) => {
       return ship.hp === 33;
