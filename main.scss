@@ -16,7 +16,14 @@ body {
   min-height: 100%;
   text-align: center;
   color: #333431;
-  background-image: radial-gradient(circle, #c4d7b9, #c4d7b9, #7f9771);
+  background-image: radial-gradient(
+    circle,
+    #c4d7b9,
+    #c4d7b9,
+    #c4d7b9,
+    #c4d7b9,
+    #7f9771
+  );
 }
 
 h3 {
@@ -25,7 +32,7 @@ h3 {
 }
 
 footer {
-  min-height: 40vh;
+  min-height: 10vh;
 }
 
 .game__container {
@@ -260,14 +267,28 @@ button:active {
 @media screen and (min-width: 576px) {
   footer {
     max-height: 0;
-    min-height: 20vh;
+    min-height: 0vh;
+  }
+  .ships {
+    grid-template:
+      "mothership mothership"
+      "defence-ship-1 defence-ship-2"
+      "defence-ship-3 defence-ship-4"
+      "defence-ship-5 defence-ship-5"
+      "attack-ship-1 attack-ship-2"
+      "attack-ship-3 attack-ship-4"
+      "attack-ship-5 attack-ship-6"
+      "attack-ship-7 attack-ship-8";
   }
 }
 
 @media screen and (min-width: 992px) {
-  footer {
-    max-height: 0;
-    min-height: 0vh;
+  body {
+    max-width: 100%;
+    min-height: 100%;
+    text-align: center;
+    color: #333431;
+    background-image: radial-gradient(circle, #c4d7b9, #c4d7b9, #7f9771);
   }
 
   .game__container {
@@ -313,6 +334,11 @@ button:active {
       "attack-ship-1 . attack-ship-2 . attack-ship-3"
       ". attack-ship-4 . attack-ship-5 ."
       "attack-ship-6 . attack-ship-7 . attack-ship-8";
+  }
+
+  h3,
+  .scores__ship {
+    font-size: 1.5em;
   }
 
   .game__title {
