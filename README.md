@@ -1,6 +1,6 @@
 # Hostile Aliens Game
 
-> _A simple web-based, text-only game loosly based on Space Invaders, featuring a single button which hits a random alien ship in the fleet. Each time the button is pressed, a random alien ship is targeted and its hit points are reduced. Once an alien ship reaches zero hit points, it is destroyed and can't be hit again. The game is over once all of the alien ships have been destroyed._</br>
+> _A simple web-based, text-only game loosely based on Space Invaders, featuring a single button which hits a random alien ship in the fleet. Each time the button is pressed, a random alien ship is targeted and its hit points are reduced. Once an alien ship reaches zero hit points, it is destroyed and can't be hit again. The game is over once all of the alien ships have been destroyed._</br>
 
 #### Project link [_here_](https://jpthacker.github.io/hostile-aliens/).
 
