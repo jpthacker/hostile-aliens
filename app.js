@@ -1,6 +1,6 @@
 // HOSTILE ALIENS GAME
 let fleetOfShipsArr = [];
-let activeFleetArr;
+let activeFleetArr = [];
 const gameContainer = document.querySelector(".game");
 const shipsContainer = document.querySelector(".ships");
 const gameOverContainer = document.querySelector(".game-over");
