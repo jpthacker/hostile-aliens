@@ -64,17 +64,45 @@ class Ship {
 }
 ```
 
-2. The next step was to use a pure function to generate a fleet of ship objects of three different types: i settled on a formation of 1 mothership, 5 defence ships and 8 attack ships. The function took four parameters: shipClass (the argument I passed was the class above), mothershipAmount, defenceShipAmount and attackShipAmount. This enabled me to make my fleet dynamic, allowing for changes to the fleet further down the line if necessary.
+2. The next step was to use a pure function to generate a fleet of ship objects of three different types: I settled on a formation of 1 mothership, 5 defence ships and 8 attack ships. The function takes four parameters: shipClass (the argument I passed was the class above), mothershipAmount, defenceShipAmount and attackShipAmount. This enabled me to make my fleet dynamic, allowing for changes to the fleet further down the line if necessary.
 
 3. The resulting array (the fleet) was then pushed to an activeFleetArr variable to identify it as 'active'.
 
-4. The next step was to generate the HTML for the fleet. I wanted to keep my index.HTML file clean and minimal, so that I could add/remove elements from the DOM dynamically depending on user input. The pure function responsible for this step loops through the fleet array and uses each ship object's generateShipHTML() method to add a unique HTML element that reflects the type and status of the ship (i.e., if the ship is sunk or targeted). This made dynamically styling the different types of ships depending on their status much easier.
+4. The next step was to generate the HTML for the fleet. I wanted to keep my index.HTML file clean and minimal, so that I could add/remove elements from the DOM dynamically depending on user input. The pure function responsible for this step loops through the fleet array and uses each ship object's generateShipHTML() method to add a unique HTML element that reflects the type and status of the ship (i.e., if the ship is sunk or targeted). This made dynamically styling the different types of ships depending on their status much easier (see step 7 below).
 
 5. Pure functions were also written to dynamically generate and update the player scores and associated HTML elements.
 
 6. The generation of both the fleet and scores HTML were combined into a generateHTML() pure function, to facilitate loading a new game upon a 'Game Over' scenario (see below). A seeries of query selectors passed into the functions as arguments identified the relevant containers in the DOM for the generated HTML elements.
 
-7. A hitRandomShip(fleetArr) function was added, making use of ships objects' targetShip() and applyShipDamage() methods to simulate a single random ship taking damage.
+7. A hitRandomShip(fleetArr) function was added, making use of ships objects' targetShip() and applyShipDamage() methods to simulate a single random ship taking damage. I used SCSS to create a @keyframes animation to indicate this, and because my HTML was being generated dynaically, this animation would be automatically applied each time the fleet was rendered, i.e. every time the 'Shoot' button (see step 9 below) was clicked:
+
+```css
+@keyframes hit {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  25% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+    text-decoration: line-through;
+  }
+  50% {
+    transform: translate(3px, 1px) rotate(-1deg);
+    text-decoration: line-through;
+  }
+  75% {
+    transform: translate(-1px, -1px) rotate(1deg);
+    text-decoration: line-through;
+  }
+  100% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+}
+
+.animated {
+  animation-name: hit;
+  animation-duration: 0.25s;
+}
+```
 
 8. A function was required to sink any ships whose hp were below 0. This function takes the fleet array as a parameter and returns a filtered array.
 
@@ -85,19 +113,19 @@ class Ship {
 - The scores and associated HTML are updated;
 - The filtered fleet array is pushed to a variable to identify it as 'active'.
 - All ship in the fleet are 'untargeted' (this enables the scss 'hit' animation to end)
-- A 'game over' function is executed which, if all the ship have been destroyed, loads the 'Game Over' screen.
+- A 'game over' function is executed which, if all the ship have been destroyed or the mothership's hp === 0, loads the 'Game Over' screen (essentially removes and adds HTML via query selectors).
 
-10. Finally, I added an event listener to the 'Restart' button on the game over screen, which newly generates the fleet, scores and associated HTML, so the game starts over.
+10. Finally, I added an event listener to the 'Restart' button on the 'Game Over' screen, which newly generates the fleet, scores and associated HTML, resulting in a new game.
 
 ## Testing
 
-Using a TDD approach, the application's Ship class, the class methods and the pure functions were tested using JEST in a seperate test.js file.
+Using a TDD approach, the application's Ship class, class methods and pure functions were tested using JEST in a seperate test.js file.
 
 ## Technologies & Features:
 
 - Vanilla JavaScript
 - OOP approach
-- Unit-tested using Jest
+- Unit-tested using Jest and a TDD approach
 - HTML5
 - CSS/SCSS
 - Mobile first / responsive design
